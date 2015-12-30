@@ -55,8 +55,9 @@ class DeleteAction extends BaseAction
      * @param string|null $id Record id
      * @return \Cake\Http\Response
      */
-    protected function _post($id = null)
+    protected function _post()
     {
+        $id = func_get_args();
         $subject = $this->_subject();
         $subject->set(['id' => $id]);
 
@@ -83,9 +84,9 @@ class DeleteAction extends BaseAction
      * @param string|null $id Record id
      * @return \Cake\Http\Response
      */
-    protected function _delete($id = null)
+    protected function _delete()
     {
-        return $this->_post($id);
+        return call_user_func_array(array($this, '_post'), func_get_args());
     }
 
     /**

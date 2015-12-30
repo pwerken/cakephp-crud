@@ -95,8 +95,9 @@ class EditAction extends BaseAction
      * @return void
      * @throws \Cake\Http\Exception\NotFoundException If record not found
      */
-    protected function _get($id = null)
+    protected function _get()
     {
+        $id = func_get_args();
         $subject = $this->_subject();
         $subject->set(['id' => $id]);
         $subject->set(['entity' => $this->_findRecord($id, $subject)]);
@@ -110,8 +111,9 @@ class EditAction extends BaseAction
      * @param string|null $id Record id
      * @return \Cake\Http\Response|null
      */
-    protected function _put($id = null)
+    protected function _put()
     {
+        $id = func_get_args();
         $subject = $this->_subject();
         $subject->set(['id' => $id]);
 
@@ -137,9 +139,9 @@ class EditAction extends BaseAction
      * @param string|null $id Record id
      * @return \Cake\Http\Response|null
      */
-    protected function _post($id = null)
+    protected function _post()
     {
-        return $this->_put($id);
+        return call_user_func_array(array($this, '_put'), func_get_args());
     }
 
     /**

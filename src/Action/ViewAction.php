@@ -47,8 +47,9 @@ class ViewAction extends BaseAction
      * @param string|null $id Record id
      * @return void
      */
-    protected function _handle($id = null)
+    protected function _handle()
     {
+        $id = func_get_args();
         $subject = $this->_subject();
         $subject->set(['id' => $id]);
 
